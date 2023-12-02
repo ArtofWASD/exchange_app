@@ -1,22 +1,32 @@
-import styled from "styled-components";
+import { useState } from 'react'
+import { Listbox } from '@headlessui/react'
+
+const people = [
+  { id: 1, name: 'Durward Reynolds', unavailable: false },
+  { id: 2, name: 'Kenton Towne', unavailable: false },
+  { id: 3, name: 'Therese Wunsch', unavailable: false },
+  { id: 4, name: 'Benedict Kessler', unavailable: true },
+  { id: 5, name: 'Katelyn Rohan', unavailable: false },
+]
 
 const Input = () => {
-
-  const Select = styled.select`
-  width:328px
-  height: 50px;
-  
-  `;
+  const [selectedPerson, setSelectedPerson] = useState(people[0])
   return (
     <>
-      <form>
-        <Select name="currency" id="currency">
-          <option value="BTC">111</option>
-          <option value="BTC">222</option>
-          <option value="BTC">33</option>
-          <option value="BTC">144411</option>
-        </Select>
-      </form>
+     <Listbox value={selectedPerson} onChange={setSelectedPerson}>
+      <Listbox.Button>{selectedPerson.name}</Listbox.Button>
+      <Listbox.Options>
+        {people.map((person) => (
+          <Listbox.Option
+            key={person.id}
+            value={person}
+            disabled={person.unavailable}
+          >
+            {person.name}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
+    </Listbox>
     </>
   );
 };

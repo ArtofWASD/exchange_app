@@ -20,7 +20,6 @@ function App() {
       <Title />
       <InputDiv>
         <Input />
-        <Input />
       </InputDiv>
     </MainDiv>
   );
