@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif'],
+      },
+      spacing: {
+        '128': '450px',
+        '300': '730px'
+      }
+    },
   },
   plugins: [],
 }
