@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { ChevronDownIcon, MinusIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { getListOfAvailableCurrencies } from "../../utils/handlers";
 interface currencyData {
   ticker: string;
@@ -9,7 +9,13 @@ interface currencyData {
   image: string;
 }
 
-const ListBox = () => {
+const ListBox = ({
+  onChange,
+  data,
+}: {
+  data: string|null;
+  onChange: (arg0: currencyData) => void;
+}) => {
   const [currencyData, setCurrencyData] = useState<Array<currencyData>>();
   const [selectedCyrrency, setSelectedCyrrency] = useState<currencyData>();
   useEffect(() => {
@@ -20,11 +26,22 @@ const ListBox = () => {
 
   return (
     <div className="w-128">
-      <Listbox value={selectedCyrrency} onChange={setSelectedCyrrency}>
+      <Listbox
+        value={selectedCyrrency}
+        onChange={(selectedCyrrency) => {
+          setSelectedCyrrency(selectedCyrrency), onChange(selectedCyrrency);
+        }}
+      >
         <div className="relative mt-1">
           <Listbox.Button className="font-roboto border-2 w-full cursor-default rounded bg-slate-100 py-3 pl-3 pr-16 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncrate h-5 w-36">
-              {selectedCyrrency ? selectedCyrrency?.name : "Выберите монету"}
+            <span className="block truncrate h-5 w-48">
+              {selectedCyrrency ? (
+                <>
+                  {data} {selectedCyrrency?.name}
+                </>
+              ) : (
+                <span className="text-slate-400">Search</span>
+              )}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center gap-2 pr-4">
               {selectedCyrrency ? (
@@ -34,10 +51,7 @@ const ListBox = () => {
               )}
               <span>
                 {selectedCyrrency ? (
-                  <img
-                    src={selectedCyrrency?.image}
-                    className="h-8 w-8 pr-2"
-                  />
+                  <img src={selectedCyrrency?.image} className="h-8 w-8 pr-2" />
                 ) : (
                   ""
                 )}
@@ -64,7 +78,16 @@ const ListBox = () => {
                   key={item.ticker + `${item.network}`}
                   value={item}
                 >
-                  {item.name}
+                  <div className="flex items-center gap-2">
+                    {/* <span>
+                      <img
+                        src={selectedCyrrency?.image}
+                        className="h-8 w-8 pr-2"
+                      />
+                    </span>
+                    <span>{selectedCyrrency?.ticker.toUpperCase()}</span> */}
+                    <span className="text-slate-400">{item.name}</span>
+                  </div>
                 </Listbox.Option>
               ))}
             </Listbox.Options>
