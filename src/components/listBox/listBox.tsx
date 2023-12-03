@@ -13,7 +13,7 @@ const ListBox = ({
   onChange,
   data,
 }: {
-  data: string|null;
+  data: string;
   onChange: (arg0: currencyData) => void;
 }) => {
   const [currencyData, setCurrencyData] = useState<Array<currencyData>>();
@@ -34,11 +34,11 @@ const ListBox = ({
       >
         <div className="relative mt-1">
           <Listbox.Button className="font-roboto border-2 w-full cursor-default rounded bg-slate-100 py-3 pl-3 pr-16 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncrate h-5 w-48">
+            <span className="block truncrate h-5 w-5/6 md:w-64">
               {selectedCyrrency ? (
-                <>
-                  {data} {selectedCyrrency?.name}
-                </>
+                <div className="flex justify-between">
+                  <span>{data}</span> <span>{selectedCyrrency?.name}</span>
+                </div>
               ) : (
                 <span className="text-slate-400">Search</span>
               )}
@@ -57,7 +57,7 @@ const ListBox = ({
                 )}
               </span>
               <span>
-                {selectedCyrrency ? selectedCyrrency.ticker.toUpperCase() : ""}
+                {selectedCyrrency ? selectedCyrrency?.ticker.toUpperCase() : ""}
               </span>
               <ChevronDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -79,13 +79,6 @@ const ListBox = ({
                   value={item}
                 >
                   <div className="flex items-center gap-2">
-                    {/* <span>
-                      <img
-                        src={selectedCyrrency?.image}
-                        className="h-8 w-8 pr-2"
-                      />
-                    </span>
-                    <span>{selectedCyrrency?.ticker.toUpperCase()}</span> */}
                     <span className="text-slate-400">{item.name}</span>
                   </div>
                 </Listbox.Option>
