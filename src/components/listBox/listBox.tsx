@@ -20,7 +20,7 @@ const ListBox = ({
   const [selectedCyrrency, setSelectedCyrrency] = useState<currencyData>();
   useEffect(() => {
     const data = getListOfAvailableCurrencies().then((data) =>
-      setCurrencyData(data.slice(0, 50))
+      setCurrencyData(data.slice(0, 100))
     );
   }, []);
 
