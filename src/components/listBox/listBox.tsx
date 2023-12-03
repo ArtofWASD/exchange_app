@@ -34,7 +34,7 @@ const ListBox = ({
       >
         <div className="relative mt-1">
           <Listbox.Button className="font-roboto border-2 w-full cursor-default rounded bg-slate-100 py-3 pl-3 pr-16 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncrate h-5 w-5/6 md:w-64">
+            <span className="block truncrate h-5 w-5/6 md:w-80">
               {selectedCyrrency ? (
                 <div className="flex justify-between">
                   <span>{data}</span> <span>{selectedCyrrency?.name}</span>
